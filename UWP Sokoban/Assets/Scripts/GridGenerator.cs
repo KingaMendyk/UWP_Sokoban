@@ -1,6 +1,9 @@
 using UnityEngine;
 
 public class GridGenerator : MonoBehaviour {
+    [SerializeField] private Camera mainCamera;
+    
+    [Space(10)]
     [SerializeField] private int width;
     [SerializeField] private int height;
     [SerializeField] private float xOffset;
@@ -21,6 +24,7 @@ public class GridGenerator : MonoBehaviour {
         height = charArray.GetLength(1);
         
         GenerateGrid();
+        CenterCamera();
     }
 
     private void GenerateGrid() {
@@ -52,5 +56,9 @@ public class GridGenerator : MonoBehaviour {
                 GameObject newTile = Instantiate(prefab, pos, Quaternion.identity, this.transform);
             }
         }
+    }
+
+    private void CenterCamera() {
+        mainCamera.transform.position = new Vector3((float)width/2 - 0.5f, (float)height/2 - 0.5f, -10);
     }
 }
