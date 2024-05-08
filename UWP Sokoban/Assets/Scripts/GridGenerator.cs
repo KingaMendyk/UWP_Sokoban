@@ -3,6 +3,10 @@ using UnityEngine;
 public class GridGenerator : MonoBehaviour {
     [SerializeField] private int width;
     [SerializeField] private int height;
+    [SerializeField] private float xOffset;
+    [SerializeField] private float yOffset;
+    
+    [Header("Prefabs")]
     [SerializeField] private GameObject groundPrefab;
     [SerializeField] private GameObject wallPrefab;
     [SerializeField] private GameObject cratePrefab;
@@ -23,7 +27,7 @@ public class GridGenerator : MonoBehaviour {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 GameObject prefab = groundPrefab;
-                Vector3 pos = new Vector3(j, height - i);
+                Vector3 pos = new Vector3(j + j*xOffset, height - i - i*yOffset);
                 char c = charArray[i, j];
                 switch (c) {
                     case '.': //ground
@@ -33,12 +37,15 @@ public class GridGenerator : MonoBehaviour {
                         prefab = wallPrefab;
                         break;
                     case '*': //crate
+                        Instantiate(groundPrefab, pos, Quaternion.identity, this.transform);
                         prefab = cratePrefab;
                         break;
                     case 'x': //target
+                        Instantiate(groundPrefab, pos, Quaternion.identity, this.transform);
                         prefab = targetPrefab;
                         break;
                     case 'o': //player
+                        Instantiate(groundPrefab, pos, Quaternion.identity, this.transform);
                         prefab = playerPrefab;
                         break;
                 }
