@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Target
+    uniqueID: 385470953
+    locked: 0
+  - name: Crate
+    uniqueID: 2656582789
+    locked: 0
+  - name: Player
+    uniqueID: 394746191
+    locked: 0
