@@ -35,7 +35,7 @@ public class GridGenerator : MonoBehaviour {
                     case '*': //crate
                         prefab = cratePrefab;
                         break;
-                    case 'X': //target
+                    case 'x': //target
                         prefab = targetPrefab;
                         break;
                     case 'o': //player

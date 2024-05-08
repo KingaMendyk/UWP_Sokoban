@@ -362,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAsset: {fileID: 4900000, guid: 8865b7d8ca0de2646a86884438f4679f, type: 3}
+  gridGenerator: {fileID: 659538332}
 --- !u!4 &1300010484
 Transform:
   m_ObjectHideFlags: 0
