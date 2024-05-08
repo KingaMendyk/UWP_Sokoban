@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class GameManager : MonoBehaviour {
+    [SerializeField] private TextAsset textAsset;
+    [SerializeField] private GridGenerator gridGenerator;
 
-    // Update is called once per frame
-    void Update()
-    {
+    private char[,] levelArray;
+    
+    private void Awake() {
+        levelArray = LevelLoader.LoadData(textAsset);
+    }
+   
+    void Start() {
+        gridGenerator.GenerateGrid(levelArray);
+    }
+    
+    void Update() {
         
     }
 }
