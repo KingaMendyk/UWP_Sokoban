@@ -4,8 +4,6 @@ public class GridGenerator : MonoBehaviour {
     [SerializeField] private Camera mainCamera;
     
     [Space(10)]
-    [SerializeField] private int width;
-    [SerializeField] private int height;
     [SerializeField] private float xOffset;
     [SerializeField] private float yOffset;
     
@@ -17,6 +15,8 @@ public class GridGenerator : MonoBehaviour {
     [SerializeField] private GameObject playerPrefab;
 
     private char[,] charArray;
+    private int width;
+    private int height;
 
     public void GenerateGrid(char[,] array) {
         charArray = array;
