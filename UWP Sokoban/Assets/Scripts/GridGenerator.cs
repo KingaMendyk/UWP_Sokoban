@@ -22,7 +22,7 @@ public class GridGenerator : MonoBehaviour {
         charArray = array;
         width = charArray.GetLength(0);
         height = charArray.GetLength(1);
-        
+
         GenerateGrid();
         CenterCamera();
     }
@@ -38,6 +38,7 @@ public class GridGenerator : MonoBehaviour {
                         prefab = groundPrefab;
                         break;
                     case '#': //wall
+                        Instantiate(groundPrefab, pos, Quaternion.identity, this.transform);
                         prefab = wallPrefab;
                         break;
                     case '*': //crate
