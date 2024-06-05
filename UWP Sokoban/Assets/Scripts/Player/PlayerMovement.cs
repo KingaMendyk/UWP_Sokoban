@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour, PlayerControls.IPlayerMoveActions {
-    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private int gridSize = 1;
     
     private PlayerControls playerControls;
-    private Vector2 movementVector;
+    private Vector3 movementVector;
 
     private Animator animator;
     private bool isMoving;
@@ -20,56 +20,57 @@ public class PlayerMovement : MonoBehaviour, PlayerControls.IPlayerMoveActions {
         animator = GetComponent<Animator>();
     }
 
-    private void Update() {
-        movementVector.Normalize();
-        if (!isMoving)
-            StartCoroutine(Move(movementVector));
-    }
-
-    private IEnumerator Move(Vector2 direction) {
+    private IEnumerator Move(Vector3 direction) {
         isMoving = true;
-        Vector2 endPosition = (Vector2)transform.position + (direction * gridSize);
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = startPosition + direction;
 
         float elapsedTime = 0f;
-        while (elapsedTime < moveSpeed) {
+        while (elapsedTime < (1/moveSpeed)) {
             elapsedTime += Time.deltaTime;
             float percent = elapsedTime / moveSpeed;
 
-            transform.position = Vector2.Lerp(transform.position, endPosition, percent);
+            transform.position = Vector3.Lerp(startPosition, endPosition, percent);
             yield return null;
         }
 
         transform.position = endPosition;
-        movementVector = Vector3.zero;
-
         isMoving = false;
     }
 
     public void OnMoveUp(InputAction.CallbackContext context) {
-        if (context.performed) {
-            movementVector = Vector2.up;
-            animator.SetTrigger("walkUp");
+        if (context.performed && !isMoving) {
+            movementVector = Vector3.up;
+            movementVector.Normalize();
+            StartCoroutine(Move(movementVector));
+            //animator.SetTrigger("walkUp");
         }
     }
 
     public void OnMoveDown(InputAction.CallbackContext context) {
-        if (context.performed) {
-            movementVector = Vector2.down;
-            animator.SetTrigger("walkDown");
+        if (context.performed && !isMoving) {
+            movementVector = Vector3.down;
+            movementVector.Normalize();
+            StartCoroutine(Move(movementVector));
+            //animator.SetTrigger("walkDown");
         }
     }
 
     public void OnMoveLeft(InputAction.CallbackContext context) {
-        if (context.performed) {
-            movementVector = Vector2.left;
-            animator.SetTrigger("walkLeft");
+        if (context.performed && !isMoving) {
+            movementVector = Vector3.left;
+            movementVector.Normalize();
+            StartCoroutine(Move(movementVector));
+            //animator.SetTrigger("walkLeft");
         }
     }
 
     public void OnMoveRight(InputAction.CallbackContext context) {
-        if (context.performed) {
-            movementVector = Vector2.right;
-            animator.SetTrigger("walkRight");
+        if (context.performed && !isMoving) {
+            movementVector = Vector3.right;
+            movementVector.Normalize();
+            StartCoroutine(Move(movementVector));
+            //animator.SetTrigger("walkRight");
         }
     }
 }
