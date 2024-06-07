@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float moveTime = 0.2f;
+    [SerializeField] private float cellSize;
     private GameObject player;
     private Animator animator;
     private bool isMoving;
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Move(Vector3 direction, string animationState) {
+        direction.Scale(new Vector3(cellSize, cellSize, 0));
         if(!isMoving)
             StartCoroutine(MoveEnumerator(direction, animationState));
     }
