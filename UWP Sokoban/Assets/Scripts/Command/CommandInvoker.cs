@@ -12,7 +12,6 @@ public class CommandInvoker {
 
     public void ExecuteCommand(ICommand command) {
         bool success = command.Execute();
-        Debug.Log(success);
 
         if (success) {
             undoStack.Push(command);
