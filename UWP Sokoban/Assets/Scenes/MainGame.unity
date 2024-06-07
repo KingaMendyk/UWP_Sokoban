@@ -152,10 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397fdd7d95ea16146a34dc8971993346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 2027481866}
   width: 5
   height: 5
-  xOffset: 0.2
-  yOffset: 0.2
+  xOffset: 0.25
+  yOffset: 0.25
   groundPrefab: {fileID: 3129904220860067685, guid: 081f5caaaa896be4193433f2d71d4dd0, type: 3}
   wallPrefab: {fileID: 7282005768800750776, guid: 7dfc72f996bd4a04694320dcc8c381d1, type: 3}
   cratePrefab: {fileID: 7823626564960432269, guid: 79eeb4740a511d4428e8e05efd6ede17, type: 3}
