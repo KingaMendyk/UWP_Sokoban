@@ -153,8 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 2027481866}
-  width: 5
-  height: 5
   xOffset: 0.25
   yOffset: 0.25
   groundPrefab: {fileID: 3129904220860067685, guid: 081f5caaaa896be4193433f2d71d4dd0, type: 3}
