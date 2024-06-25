@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
 
     private string scoreSavePath = "/score.txt";
     
-    private void Awake() {
+    private void Start() {
         LoadLevel();
     }
     
