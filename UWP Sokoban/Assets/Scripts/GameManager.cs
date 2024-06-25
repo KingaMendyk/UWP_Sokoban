@@ -10,11 +10,11 @@ public class GameManager : MonoBehaviour {
         levelArray = LevelLoader.LoadData(textAsset);
     }
    
-    void Start() {
+    private void Start() {
         gridGenerator.GenerateGrid(levelArray);
     }
     
-    void Update() {
+    private void Update() {
         
     }
 }
