@@ -27,15 +27,17 @@ public class GameManager : MonoBehaviour {
     private string scoreSavePath = "/score.txt";
     
     private void Awake() {
-        levelArray = LevelLoader.LoadData(textAsset);
+        LoadLevel();
     }
-   
-    private void Start() {
+    
+    private void LoadLevel() {
+        levelArray = LevelLoader.LoadData(textAsset);
         gridGenerator.GenerateGrid(levelArray);
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
         crateCount = GameObject.FindGameObjectsWithTag("Crate").Length;
         target = GameObject.FindGameObjectWithTag("Target").GetComponent<Target.Target>();
         target.TargetEntered.AddListener(ChangeCrateCount);
+        HUD.SetActive(true);
         LoadScore();
     }
 
@@ -58,6 +60,10 @@ public class GameManager : MonoBehaviour {
     public void NextLevel() {
         SaveScore();
         currentCrateCount = 0;
+        textAsset = new TextAsset(File.ReadAllText("Assets/TextFiles/level_map_2.txt"));
+        winScreen.Close();
+        gridGenerator.DestroyGrid();
+        LoadLevel();
     }
 
     public void ExitToMenu() {

@@ -62,4 +62,10 @@ public class GridGenerator : MonoBehaviour {
     private void CenterCamera() {
         mainCamera.transform.position = new Vector3((float)width/2 - 0.5f, (float)height/2 - 0.5f, -10);
     }
+
+    public void DestroyGrid() {
+        foreach (Transform child in gameObject.transform) {
+            Destroy(child.gameObject);
+        }
+    }
 }
