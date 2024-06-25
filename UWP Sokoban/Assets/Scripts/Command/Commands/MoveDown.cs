@@ -3,6 +3,8 @@
 public class MoveDown : ICommand{
     private PlayerMovement playerMovement;
     private Vector3 playerPosition;
+    private bool withCrate;
+    private GameObject crate;
     
     private int crateLayer = 1 << 6;
     private int wallLayer = 1 << 8;
@@ -25,7 +27,10 @@ public class MoveDown : ICommand{
                 !Physics2D.OverlapPoint(playerPosition + 2 * Vector3.down, groundLayer)) {
                 return false;
             }
-            playerMovement.Move(Vector3.down, "walkDown", collider.gameObject);
+
+            withCrate = true;
+            crate = collider.gameObject;
+            playerMovement.Move(Vector3.down, "walkDown", crate);
             return true;
         }
         
@@ -37,6 +42,8 @@ public class MoveDown : ICommand{
     }
 
     public void Undo() {
+        if(withCrate)
+            playerMovement.Move(Vector3.up, "walkUp", crate);
         playerMovement.Move(Vector3.up, "walkUp");
     }
 }
