@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
     private char[,] levelArray;
     private int crateCount;
     private int currentCrateCount;
+
+    private Target.Target target;
     
     private void Awake() {
         levelArray = LevelLoader.LoadData(textAsset);
@@ -15,9 +17,16 @@ public class GameManager : MonoBehaviour {
     private void Start() {
         gridGenerator.GenerateGrid(levelArray);
         crateCount = GameObject.FindGameObjectsWithTag("Crate").Length;
+        target = GameObject.FindGameObjectWithTag("Target").GetComponent<Target.Target>();
     }
     
     private void Update() {
-        
+        if (currentCrateCount == crateCount) {
+            Debug.Log("You win! :)");
+        }
+    }
+
+    private void ChangeCrateCount() {
+        currentCrateCount++;
     }
 }
