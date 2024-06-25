@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private GridGenerator gridGenerator;
 
     private char[,] levelArray;
+    private int crateCount;
+    private int currentCrateCount;
     
     private void Awake() {
         levelArray = LevelLoader.LoadData(textAsset);
@@ -12,6 +14,7 @@ public class GameManager : MonoBehaviour {
    
     private void Start() {
         gridGenerator.GenerateGrid(levelArray);
+        crateCount = GameObject.FindGameObjectsWithTag("Crate").Length;
     }
     
     private void Update() {
