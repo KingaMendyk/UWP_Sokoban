@@ -7,6 +7,7 @@
     public class MenuMenager : MonoBehaviour {
         [SerializeField] private GameObject mainMenu;
         [SerializeField] private GameObject levelSelector;
+        [SerializeField] private GameManager gameManager;
 
         public void Awake() {
             mainMenu.SetActive(true);
@@ -27,6 +28,7 @@
         }
         
         public void LoadLevel(string fileName) {
+            gameManager.setTextAsset(fileName);
             SceneManager.LoadScene("MainGame");
         }
 

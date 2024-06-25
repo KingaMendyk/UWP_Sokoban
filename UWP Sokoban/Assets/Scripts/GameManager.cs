@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
+    public static GameManager Instance;
+    
     [SerializeField] private TextAsset textAsset;
     [SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private WinScreen winScreen;
@@ -27,6 +29,13 @@ public class GameManager : MonoBehaviour {
     private string scoreSavePath = "/score.txt";
     
     private void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+        }
+        else {
+            Instance = this;
+        }
+        DontDestroyOnLoad(this);
         levelArray = LevelLoader.LoadData(textAsset);
     }
    
