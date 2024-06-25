@@ -16,13 +16,12 @@ namespace Player {
     
         private IEnumerator MoveEnumerator(Vector3 direction, string animationState) {
             isMoving = true;
+            animator.SetTrigger(animationState);
             Vector3 startPosition = player.transform.position;
             Vector3 endPosition = startPosition + direction;
 
             float elapsedTime = 0f;
             while (elapsedTime < moveTime) {
-                animator.SetTrigger(animationState);
-            
                 float percent = elapsedTime / moveTime;
                 player.transform.position = Vector3.Lerp(startPosition, endPosition, percent);
                 elapsedTime += Time.deltaTime;
@@ -48,6 +47,7 @@ namespace Player {
 
         private IEnumerator MoveEnumerator(Vector3 direction, string animationState, GameObject crate) {
             isMoving = true;
+            animator.SetTrigger(animationState);
             Vector3 startPosition = player.transform.position;
             Vector3 endPosition = startPosition + direction;
 
@@ -56,8 +56,6 @@ namespace Player {
 
             float elapsedTime = 0f;
             while (elapsedTime < moveTime) {
-                animator.SetTrigger(animationState);
-            
                 float percent = elapsedTime / moveTime;
                 player.transform.position = Vector3.Lerp(startPosition, endPosition, percent);
                 crate.transform.position = Vector3.Lerp(crateStartPosition, crateEndPosition, percent);
