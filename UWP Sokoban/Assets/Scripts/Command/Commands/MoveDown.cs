@@ -24,6 +24,7 @@ public class MoveDown : ICommand{
         Collider2D collider = Physics2D.OverlapPoint((destination), crateLayer);
         if (collider) {
             if (Physics2D.OverlapPoint(playerPosition + 2 * Vector3.down, wallLayer) || 
+                Physics2D.OverlapPoint(playerPosition + 2 * Vector3.down, crateLayer) || 
                 !Physics2D.OverlapPoint(playerPosition + 2 * Vector3.down, groundLayer)) {
                 return false;
             }

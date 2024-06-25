@@ -24,6 +24,7 @@ public class MoveLeft : ICommand {
         Collider2D collider = Physics2D.OverlapPoint((destination), crateLayer);
         if (collider) {
             if (Physics2D.OverlapPoint(playerPosition + 2 * Vector3.left, wallLayer) || 
+                Physics2D.OverlapPoint(playerPosition + 2 * Vector3.left, crateLayer) || 
                 !Physics2D.OverlapPoint(playerPosition + 2 * Vector3.left, groundLayer)) {
                 return false;
             }

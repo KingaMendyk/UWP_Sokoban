@@ -25,6 +25,7 @@ public class MoveUp : ICommand {
         Collider2D collider = Physics2D.OverlapPoint((destination), crateLayer);
         if (collider) {
             if (Physics2D.OverlapPoint(playerPosition + 2 * Vector3.up, wallLayer) || 
+                Physics2D.OverlapPoint(playerPosition + 2 * Vector3.up, crateLayer) ||
                 !Physics2D.OverlapPoint(playerPosition + 2 * Vector3.up, groundLayer)) {
                 return false;
             }
