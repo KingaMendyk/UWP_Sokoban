@@ -7,8 +7,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
-    public static GameManager Instance;
-    
     [SerializeField] private TextAsset textAsset;
     [SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private WinScreen winScreen;
@@ -29,22 +27,17 @@ public class GameManager : MonoBehaviour {
     private string scoreSavePath = "/score.txt";
     
     private void Awake() {
-        if (Instance != null && Instance != this) {
-            Destroy(gameObject);
-        }
-        else {
-            Instance = this;
-        }
-        DontDestroyOnLoad(this);
-        levelArray = LevelLoader.LoadData(textAsset);
+        LoadLevel();
     }
-   
-    private void Start() {
+    
+    private void LoadLevel() {
+        levelArray = LevelLoader.LoadData(textAsset);
         gridGenerator.GenerateGrid(levelArray);
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
         crateCount = GameObject.FindGameObjectsWithTag("Crate").Length;
         target = GameObject.FindGameObjectWithTag("Target").GetComponent<Target.Target>();
         target.TargetEntered.AddListener(ChangeCrateCount);
+        HUD.SetActive(true);
         LoadScore();
     }
 
@@ -64,9 +57,18 @@ public class GameManager : MonoBehaviour {
         AudioManager.Instance.PlaySound(winAudio);
     }
 
+    public void StartOver() {
+        gridGenerator.DestroyGrid();
+        LoadLevel();
+    }
+
     public void NextLevel() {
         SaveScore();
         currentCrateCount = 0;
+        textAsset = new TextAsset(File.ReadAllText("Assets/TextFiles/level_map_2.txt"));
+        winScreen.Close();
+        gridGenerator.DestroyGrid();
+        LoadLevel();
     }
 
     public void ExitToMenu() {
@@ -103,9 +105,5 @@ public class GameManager : MonoBehaviour {
         catch (Exception e) {
             Debug.LogError("Unable to load data due to " + e.Message + " " + e.StackTrace);
         }
-    }
-
-    public void setTextAsset(string textAssetName) {
-        //textAsset = textAssetName;
     }
 }

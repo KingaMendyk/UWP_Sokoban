@@ -10,7 +10,7 @@ namespace Player {
         private Animator animator;
         private bool isMoving;
 
-        void Awake() {
+        private void Awake() {
             player = GameObject.FindGameObjectWithTag("Player");
             animator = this.player.GetComponent<Animator>();
         }
