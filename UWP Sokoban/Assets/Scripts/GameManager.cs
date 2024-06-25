@@ -1,4 +1,5 @@
 using Player;
+using TMPro;
 using UI;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private TextAsset textAsset;
     [SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private WinScreen winScreen;
+    [SerializeField] private TMP_Text scoreText;
+    
     private PlayerInput playerInput;
 
     private char[,] levelArray;
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour {
 
     private void ChangeCrateCount() {
         currentCrateCount++;
+        scoreText.text = (100 * currentCrateCount).ToString();
         if (currentCrateCount == crateCount) {
             ShowWinMessage();
         }
@@ -35,6 +39,6 @@ public class GameManager : MonoBehaviour {
 
     private void ShowWinMessage() {
         playerInput.Disable();
-        winScreen.Open();
+        winScreen.Open(currentCrateCount);
     }
 }
