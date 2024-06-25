@@ -5,6 +5,7 @@ namespace Player {
     public class PlayerMovement : MonoBehaviour {
         [SerializeField] private float moveTime = 0.2f;
         [SerializeField] private float cellSize;
+        [SerializeField] private AudioClip moveClip;
         private GameObject player;
         private Animator animator;
         private bool isMoving;
@@ -17,6 +18,8 @@ namespace Player {
         private IEnumerator MoveEnumerator(Vector3 direction, string animationState) {
             isMoving = true;
             animator.SetTrigger(animationState);
+            AudioManager.Instance.PlaySound(moveClip);
+            
             Vector3 startPosition = player.transform.position;
             Vector3 endPosition = startPosition + direction;
 
@@ -48,6 +51,8 @@ namespace Player {
         private IEnumerator MoveEnumerator(Vector3 direction, string animationState, GameObject crate) {
             isMoving = true;
             animator.SetTrigger(animationState);
+            AudioManager.Instance.PlaySound(moveClip);
+            
             Vector3 startPosition = player.transform.position;
             Vector3 endPosition = startPosition + direction;
 

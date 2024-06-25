@@ -1627,6 +1627,7 @@ MonoBehaviour:
   textAsset: {fileID: 4900000, guid: 8865b7d8ca0de2646a86884438f4679f, type: 3}
   gridGenerator: {fileID: 659538332}
   winScreen: {fileID: 768508806}
+  HUD: {fileID: 905694269}
   scoreText: {fileID: 1268456755}
   winAudio: {fileID: 8300000, guid: 67e44278872f9d941a2e5e0817aa8f17, type: 3}
   targetAudio: {fileID: 8300000, guid: 11f71dec44314ee488d2f96043dd346a, type: 3}

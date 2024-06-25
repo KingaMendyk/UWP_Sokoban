@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private TextAsset textAsset;
     [SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private WinScreen winScreen;
+    [SerializeField] private GameObject HUD;
     [SerializeField] private TMP_Text scoreText;
 
     [SerializeField] private AudioClip winAudio;
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void ShowWinMessage() {
+        HUD.SetActive(false);
         playerInput.Disable();
         winScreen.Open(scoreText.text);
         AudioManager.Instance.PlaySound(winAudio);
