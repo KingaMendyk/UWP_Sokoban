@@ -6,15 +6,10 @@ namespace Player {
         [SerializeField] private float moveTime = 0.2f;
         [SerializeField] private float cellSize;
         [SerializeField] private AudioClip moveClip;
-        private GameObject player;
-        private Animator animator;
+        [SerializeField] private GameObject player;
+        [SerializeField] private Animator animator;
         private bool isMoving;
 
-        private void Awake() {
-            player = GameObject.FindGameObjectWithTag("Player");
-            animator = this.player.GetComponent<Animator>();
-        }
-    
         private IEnumerator MoveEnumerator(Vector3 direction, string animationState) {
             isMoving = true;
             animator.SetTrigger(animationState);
@@ -43,7 +38,7 @@ namespace Player {
         }
 
         public void Move(Vector3 direction, string animationState, GameObject colliderGameObject) {
-            direction.Scale(new Vector3(cellSize, cellSize, 0));
+           direction.Scale(new Vector3(cellSize, cellSize, 0));
             if(!isMoving)
                 StartCoroutine(MoveEnumerator(direction, animationState, colliderGameObject));
         }

@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour {
 
     public void StartOver() {
         gridGenerator.DestroyGrid();
+        currentCrateCount = 0;
         LoadLevel();
     }
 

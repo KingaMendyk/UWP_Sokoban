@@ -210,3 +210,5 @@ MonoBehaviour:
   moveTime: 0.2
   cellSize: 1.25
   moveClip: {fileID: 8300000, guid: c89bab50a8a6e4649a73209205926f3e, type: 3}
+  player: {fileID: 4246512166978484913}
+  animator: {fileID: 9187971528591801507}
