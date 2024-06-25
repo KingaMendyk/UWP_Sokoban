@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour {
         AudioManager.Instance.PlaySound(winAudio);
     }
 
+    public void StartOver() {
+        gridGenerator.DestroyGrid();
+        LoadLevel();
+    }
+
     public void NextLevel() {
         SaveScore();
         currentCrateCount = 0;
