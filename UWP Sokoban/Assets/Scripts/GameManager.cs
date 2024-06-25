@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
+    public static GameManager Instance;
+    
     [SerializeField] private TextAsset textAsset;
     [SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private WinScreen winScreen;
@@ -27,6 +29,13 @@ public class GameManager : MonoBehaviour {
     private string scoreSavePath = "/score.txt";
     
     private void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+        }
+        else {
+            Instance = this;
+        }
+        DontDestroyOnLoad(this);
         LoadLevel();
     }
     
@@ -105,5 +114,9 @@ public class GameManager : MonoBehaviour {
         catch (Exception e) {
             Debug.LogError("Unable to load data due to " + e.Message + " " + e.StackTrace);
         }
+    }
+    
+    public void setTextAsset(string textAssetName) {
+        textAsset = new TextAsset(File.ReadAllText("Assets/TextFiles/" + textAssetName + ".txt"));
     }
 }
