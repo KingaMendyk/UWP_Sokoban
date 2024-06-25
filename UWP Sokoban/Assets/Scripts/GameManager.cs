@@ -18,15 +18,17 @@ public class GameManager : MonoBehaviour {
         gridGenerator.GenerateGrid(levelArray);
         crateCount = GameObject.FindGameObjectsWithTag("Crate").Length;
         target = GameObject.FindGameObjectWithTag("Target").GetComponent<Target.Target>();
-    }
-    
-    private void Update() {
-        if (currentCrateCount == crateCount) {
-            Debug.Log("You win! :)");
-        }
+        target.TargetEntered.AddListener(ChangeCrateCount);
     }
 
     private void ChangeCrateCount() {
         currentCrateCount++;
+        if (currentCrateCount == crateCount) {
+            ShowWinMessage();
+        }
+    }
+
+    private void ShowWinMessage() {
+        
     }
 }
