@@ -12,14 +12,14 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private GridGenerator gridGenerator;
+    [SerializeField] private PlayerInput playerInput;
+    
     [SerializeField] private WinScreen winScreen;
     [SerializeField] private GameObject HUD;
     [SerializeField] private TMP_Text scoreText;
 
     [SerializeField] private AudioClip winAudio;
     [SerializeField] private AudioClip targetAudio;
-    
-    private PlayerInput playerInput;
 
     private char[,] levelArray;
     private int crateCount;
@@ -36,12 +36,13 @@ public class GameManager : MonoBehaviour {
     private void LoadLevel() {
         levelArray = LevelLoader.LoadData(levelManager.getTextAsset());
         gridGenerator.GenerateGrid(levelArray);
-        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
         crateCount = GameObject.FindGameObjectsWithTag("Crate").Length;
         target = GameObject.FindGameObjectWithTag("Target").GetComponent<Target.Target>();
         target.TargetEntered.AddListener(ChangeCrateCount);
         HUD.SetActive(true);
         LoadScore();
+        playerInput.LoadPlayer();
+        playerInput.Enable();
     }
 
     private void ChangeCrateCount() {

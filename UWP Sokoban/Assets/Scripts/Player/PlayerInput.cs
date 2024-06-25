@@ -7,7 +7,8 @@ namespace Player {
     public class PlayerInput : MonoBehaviour, PlayerControls.IPlayerMoveActions {
         private PlayerControls playerControls;
         private CommandInvoker commandInvoker;
-        [SerializeField] private PlayerMovement playerMovement;
+        private GameObject player;
+        private PlayerMovement playerMovement;
 
         private void Awake() {
             playerControls = new PlayerControls();
@@ -16,30 +17,43 @@ namespace Player {
             commandInvoker = new CommandInvoker();
         }
 
+        public void LoadPlayer() {
+            player = GameObject.FindGameObjectWithTag("Player");
+            playerMovement = player.GetComponent<PlayerMovement>();
+        }
+
         public void OnMoveUp(InputAction.CallbackContext context) {
+            if(player == null)
+                LoadPlayer();
             if (context.performed) {
-                ICommand moveUpCommand = new MoveUp(playerMovement, transform.position);
+                ICommand moveUpCommand = new MoveUp(playerMovement, player.transform.position);
                 commandInvoker.ExecuteCommand(moveUpCommand);
             }
         }
 
         public void OnMoveDown(InputAction.CallbackContext context) {
+            if(player == null)
+                LoadPlayer();
             if (context.performed) {
-                ICommand moveDownCommand = new MoveDown(playerMovement, transform.position);
+                ICommand moveDownCommand = new MoveDown(playerMovement, player.transform.position);
                 commandInvoker.ExecuteCommand(moveDownCommand);
             }
         }
 
         public void OnMoveLeft(InputAction.CallbackContext context) {
+            if(player == null)
+                LoadPlayer();
             if (context.performed) {
-                ICommand moveLeftCommand = new MoveLeft(playerMovement, transform.position);
+                ICommand moveLeftCommand = new MoveLeft(playerMovement, player.transform.position);
                 commandInvoker.ExecuteCommand(moveLeftCommand);
             }
         }
 
         public void OnMoveRight(InputAction.CallbackContext context) {
+            if(player == null)
+                LoadPlayer();
             if (context.performed) {
-                ICommand moveRightCommand = new MoveRight(playerMovement, transform.position);
+                ICommand moveRightCommand = new MoveRight(playerMovement, player.transform.position);
                 commandInvoker.ExecuteCommand(moveRightCommand);
             }
         }
