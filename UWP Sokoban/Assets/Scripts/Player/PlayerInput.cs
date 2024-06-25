@@ -55,5 +55,13 @@ namespace Player {
                 commandInvoker.RedoCommand();
             }
         }
+
+        public void Enable() {
+            playerControls.PlayerMove.Enable();
+        }
+
+        public void Disable() {
+            playerControls.PlayerMove.Disable();
+        }
     }
 }

@@ -1,8 +1,12 @@
+using Player;
+using UI;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
     [SerializeField] private TextAsset textAsset;
     [SerializeField] private GridGenerator gridGenerator;
+    [SerializeField] private WinScreen winScreen;
+    private PlayerInput playerInput;
 
     private char[,] levelArray;
     private int crateCount;
@@ -16,6 +20,7 @@ public class GameManager : MonoBehaviour {
    
     private void Start() {
         gridGenerator.GenerateGrid(levelArray);
+        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
         crateCount = GameObject.FindGameObjectsWithTag("Crate").Length;
         target = GameObject.FindGameObjectWithTag("Target").GetComponent<Target.Target>();
         target.TargetEntered.AddListener(ChangeCrateCount);
@@ -29,6 +34,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void ShowWinMessage() {
-        
+        playerInput.Disable();
+        winScreen.Open();
     }
 }
