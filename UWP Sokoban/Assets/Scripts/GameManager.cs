@@ -95,4 +95,8 @@ public class GameManager : MonoBehaviour {
             Debug.LogError("Unable to load data due to " + e.Message + " " + e.StackTrace);
         }
     }
+
+    public void setTextAsset(string textAssetName) {
+        //textAsset = textAssetName;
+    }
 }
