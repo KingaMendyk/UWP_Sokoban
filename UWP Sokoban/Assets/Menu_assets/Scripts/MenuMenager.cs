@@ -1,4 +1,5 @@
 
+    using DefaultNamespace;
     using UnityEditor;
     using UnityEngine;
     using UnityEngine.SceneManagement;
@@ -7,7 +8,7 @@
     public class MenuMenager : MonoBehaviour {
         [SerializeField] private GameObject mainMenu;
         [SerializeField] private GameObject levelSelector;
-        [SerializeField] private GameManager gameManager;
+        [SerializeField] private LevelManager levelManager;
 
         public void Awake() {
             mainMenu.SetActive(true);
@@ -28,7 +29,7 @@
         }
         
         public void LoadLevel(string fileName) {
-            gameManager.setTextAsset(fileName);
+            levelManager.setTextAsset(fileName);
             SceneManager.LoadScene("MainGame");
         }
 

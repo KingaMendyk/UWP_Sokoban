@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using DefaultNamespace;
 using Player;
 using TMPro;
 using UI;
@@ -8,8 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public static GameManager Instance;
-    
-    [SerializeField] private TextAsset textAsset;
+
+    [SerializeField] private LevelManager levelManager;
     [SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private WinScreen winScreen;
     [SerializeField] private GameObject HUD;
@@ -29,18 +30,11 @@ public class GameManager : MonoBehaviour {
     private string scoreSavePath = "/score.txt";
     
     private void Awake() {
-        if (Instance != null && Instance != this) {
-            Destroy(gameObject);
-        }
-        else {
-            Instance = this;
-        }
-        DontDestroyOnLoad(this);
         LoadLevel();
     }
     
     private void LoadLevel() {
-        levelArray = LevelLoader.LoadData(textAsset);
+        levelArray = LevelLoader.LoadData(levelManager.getTextAsset());
         gridGenerator.GenerateGrid(levelArray);
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
         crateCount = GameObject.FindGameObjectsWithTag("Crate").Length;
@@ -74,7 +68,7 @@ public class GameManager : MonoBehaviour {
     public void NextLevel() {
         SaveScore();
         currentCrateCount = 0;
-        textAsset = new TextAsset(File.ReadAllText("Assets/TextFiles/level_map_2.txt"));
+        levelManager.setTextAsset("level_map_2");
         winScreen.Close();
         gridGenerator.DestroyGrid();
         LoadLevel();
@@ -114,9 +108,5 @@ public class GameManager : MonoBehaviour {
         catch (Exception e) {
             Debug.LogError("Unable to load data due to " + e.Message + " " + e.StackTrace);
         }
-    }
-    
-    public void setTextAsset(string textAssetName) {
-        textAsset = new TextAsset(File.ReadAllText("Assets/TextFiles/" + textAssetName + ".txt"));
     }
 }
