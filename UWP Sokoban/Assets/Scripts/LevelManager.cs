@@ -1,35 +1,22 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class LevelManager : MonoBehaviour {
-        public static LevelManager Instance;
+    public static class LevelManager {
+        private static TextAsset textAsset;
         
-        private TextAsset textAsset;
-        private string text;
-        
-        private void Awake() {
-            if (Instance != null && Instance != this) {
-                setTextAsset(Instance.getText());
-                Destroy(gameObject);
+        public static void SetTextAsset(string textAssetName) {
+            try {
+                textAsset = new TextAsset(File.ReadAllText(Application.streamingAssetsPath +"/"+ textAssetName + ".txt"));
             }
-            else {
-                Instance = this;
+            catch (Exception e) {
+                Debug.LogError(e);
             }
-            DontDestroyOnLoad(this);
-        }
-        
-        public void setTextAsset(string textAssetName) {
-            textAsset = new TextAsset(File.ReadAllText("Assets/TextFiles/" + textAssetName + ".txt"));
-            text = textAssetName;
         }
 
-        private string getText() {
-            return text;
-        }
-
-        public TextAsset getTextAsset() {
+        public static TextAsset GetTextAsset() {
             return textAsset;
         }
     }
