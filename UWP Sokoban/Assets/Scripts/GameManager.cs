@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private WinScreen winScreen;
     [SerializeField] private TMP_Text scoreText;
+
+    [SerializeField] private AudioClip winAudio;
+    [SerializeField] private AudioClip targetAudio;
     
     private PlayerInput playerInput;
 
@@ -31,6 +34,7 @@ public class GameManager : MonoBehaviour {
 
     private void ChangeCrateCount() {
         currentCrateCount++;
+        AudioManager.Instance.PlaySound(targetAudio);
         scoreText.text = (100 * currentCrateCount).ToString();
         if (currentCrateCount == crateCount) {
             ShowWinMessage();
@@ -40,5 +44,6 @@ public class GameManager : MonoBehaviour {
     private void ShowWinMessage() {
         playerInput.Disable();
         winScreen.Open(scoreText.text);
+        AudioManager.Instance.PlaySound(winAudio);
     }
 }
