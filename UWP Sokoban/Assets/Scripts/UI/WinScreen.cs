@@ -12,8 +12,8 @@ namespace UI {
             animator = GetComponent<Animator>();
         }
 
-        public void Open(int score) {
-            scoreText.text = score.ToString();
+        public void Open(string score) {
+            scoreText.text = score;
             animator.SetTrigger(OpenWinScreen);
         }
     }

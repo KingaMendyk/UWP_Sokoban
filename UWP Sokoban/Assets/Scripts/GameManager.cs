@@ -39,6 +39,6 @@ public class GameManager : MonoBehaviour {
 
     private void ShowWinMessage() {
         playerInput.Disable();
-        winScreen.Open(currentCrateCount);
+        winScreen.Open(scoreText.text);
     }
 }
